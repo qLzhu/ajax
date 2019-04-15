@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>AJAX 结合 PHP</title>
+</head>
+<body>
+  <p>GET提交数据，注意观察地址栏</p>
+  <form id="gets">
+    <input type="text" name="user-name" id="userName">
+    <input type="submit" value="提交" id="sub">
+  </form>
+
+  <p>POST 提交数据</p>
+  <form id="posts">
+    <input type="text" name="user-name" id="userName">
+    <input type="submit" value="提交" id="sub">
+  </form>
+<script>
+  document.getElementById('gets').addEventListener('submit', function(e) {
+    // 取消submit默认行为
+    e.preventDefault();
+    const user = document.getElementsByTagName("input")[0].value;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './form.php?user-name='+ user, true);
+    xhr.onload = function () {
+      if (xhr.status = 200) {
+        document.body.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send();
+  });
+
+  document.getElementById('posts').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('posts').getElementsByTagName("input")[0].value;
+    // 设置需要传递的参数给send
+    const names = "user-name=" + user;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', './form.php', true);
+    // POST 请求需要设置请求头
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status = 200) {
+        document.body.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send(names);
+  })
+</script>
+</body>
+</html>
