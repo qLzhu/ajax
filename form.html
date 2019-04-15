@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>HTML原始提交表单</title>
+</head>
+<body>
+  <p>GET提交数据，注意观察地址栏</p>
+  <form action="./form.php" method="GET">
+    <input type="text" name="user-name" id="userName">
+    <input type="submit" value="提交" id="sub">
+  </form>
+
+  <p>POST 提交数据</p>
+  <form action="./form.php" method="POST">
+    <input type="text" name="user-name" id="userName">
+    <input type="submit" value="提交" id="sub">
+  </form>
+</body>
+</html>
