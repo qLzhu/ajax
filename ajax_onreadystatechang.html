@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Ajax - onreadystatechange</title>
+</head>
+<body>
+  <button id="ajaxBtn">获取文本</button>
+<script>
+  document.getElementById('ajaxBtn').addEventListener('click', function(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ritwickdey/vsextensions/LiveServer/5.5.1/vspackage', true);
+    console.log(xhr.readyState); // 1
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState); // 2, 3, 4
+      // 请求加载时会显示此设置
+      if(xhr.readyState == 3) {
+        const line = `<div style="width: 100px; height: 100px;background-color: red;margin: 200px auto 0;"></div>`;
+        document.body.innerHTML = line;
+      };
+      // 请求完成后会执行此处操作
+      if(xhr.status == 200 && xhr.readyState == 4) {
+        document.body.innerHTML = xhr.responseText;
+      };
+    }
+    xhr.send();
+  })
+</script>
+</body>
+</html>
