@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Ajax - 基本使用案例</title>
+</head>
+<body>
+  <button id="ajaxBtn">获取文本</button>
+<script>
+  document.getElementById('ajaxBtn').addEventListener('click', function(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './date.txt', true);
+    xhr.onreadystatechange = function () {
+      if(xhr.status == 200 && xhr.readyState == 4) {
+        document.body.innerHTML = xhr.responseText;
+      }
+    }
+    xhr.send();
+  })
+</script>
+</body>
+</html>
