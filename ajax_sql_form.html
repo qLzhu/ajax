@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>AJAX 结合 PHP</title>
+</head>
+<body>
+  <p>POST 提交数据</p>
+  <form id="posts">
+    <input type="text" name="name">
+    <input type="submit" value="提交">
+  </form>
+<script>
+  document.getElementById('posts').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementsByTagName("input")[0].value;
+    // 设置需要传递的参数给send
+    const names = "name=" + user;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', './ajax_sql_form.php', true);
+    // POST 请求需要设置请求头
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onload = function () {
+      if (xhr.status = 200) {
+        document.body.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.send(names);
+  })
+</script>
+</body>
+</html>
