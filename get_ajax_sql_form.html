@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>获取数据库内的数据</title>
+</head>
+<body>
+<button>获取数据</button>
+<script>
+  document.getElementsByTagName('button')[0].addEventListener('click', function() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './get_ajax_sql_form.php', true);
+    xhr.onload = function () {
+      if (xhr.status = 200) {
+        const users = JSON.parse(xhr.responseText);
+        let output = "";
+        for (let i in users) {
+          output += `
+          <ul>
+            <li>${users[i].id}</li>
+            <li>${users[i].name}</li>
+          </ul>
+          `;
+        }
+        document.body.innerHTML = output;
+      }
+    }
+    xhr.send();
+  })
+</script>
+</body>
+</html>
