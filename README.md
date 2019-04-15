@@ -1,7 +1,7 @@
 Ajax
 ===
 
-##### readyState 状态码
+##### readyState状态码
 
 - 0: 请求未初始化
 - 1: 服务器连接已建立
