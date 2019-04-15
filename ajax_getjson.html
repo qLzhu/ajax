@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Ajax - 获取Json文件</title>
+</head>
+<body>
+  <button id="btn">获取JSON文件</button>
+<script>
+  document.getElementsByTagName('button')[0].addEventListener('click', function(){
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './data.json', true);
+    xhr.onload = function() {
+      if (xhr.status = 200) {
+        // json 文件需要先转换下
+        const obj = JSON.parse(xhr.responseText);
+        for (let i in obj) {
+          document.body.innerHTML += `
+            <ul>
+              <li>${obj[i].name}</li>
+              <li>${obj[i].age}</li>
+            </ul>
+          `;
+        }
+      }
+    }
+    xhr.send()
+  })
+</script>
+</body>
+</html>
